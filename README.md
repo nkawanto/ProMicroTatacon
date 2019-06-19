@@ -2,7 +2,7 @@
 This is an attempt to create a replica controller of the arcade game Taiko no Tatsujin (太鼓の達人).
 
 * Author: Nicholas Kawanto
-* Email: nkawanto@gmail.com
+* Date created: 6/19/2019
 
 
 # Installation

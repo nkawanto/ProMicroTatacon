@@ -23,6 +23,7 @@
 #include <Keyboard.h>
 
 //Defines, adjust accordingly
+//Based on LDT0-028K
 #define NUM_PIEZO 4
 #define LKAT_THRESHOLD  5
 #define LDON_THRESHOLD 5
@@ -42,7 +43,7 @@ float input[NUM_PIEZO];
 //Da-don
 void setup() {
 	Serial.begin(9600);
-	for (int i = 0; i<NUM_PIEZO; i++) {
+	for (int i = 0; i < NUM_PIEZO; i++) {
 		lastPeakTime[i] = 0;
 		input[i] = 0;
 	}
@@ -117,7 +118,7 @@ void loop() {
 	}
 }
 
-//To simulate keyboard perss using Keyboard.h da-don
+//To simulate keyboard press using Keyboard.h da-don
 void keyPress(int slot, float strength, int currentTime) {
 	if (strength > threshold[slot]) {
 		Keyboard.write(key[slot]);
