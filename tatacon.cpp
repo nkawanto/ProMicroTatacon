@@ -74,23 +74,20 @@ void loop() {
 		//Chances of double kat da-don (ratio of both inputs are +-20% da-don)
 		float ratio = input[0] / input[3];
 		if (ratio > 0.8 && ratio < 1.25) {
-			if (currentTime - lastPeakTime[0] >= TIME_BETWEEN_PEAKS || currentTime - lastPeakTime[3] >= TIME_BETWEEN_PEAKS) {
-				keyPress(0, input[0], currentTime);
-				keyPress(3, input[3], currentTime);
-			}
+			keyPress(0, input[0], currentTime);
+			keyPress(3, input[3], currentTime);
 		}
 
-		//cCances of single kat da-don
+
+		//Chances of single kat da-don
 		else {
 			//Determine the side being hit da-don
 			int max = 3;
 			if (input[0] > input[3])
 				max = 0;
 
-			if (currentTime - lastPeakTime[max] >= TIME_BETWEEN_PEAKS)
-				keyPress(max, input[max], currentTime);
+			keyPress(max, input[max], currentTime);
 		}
-
 	}
 
 	//Chances of don being hit da-don
@@ -99,10 +96,8 @@ void loop() {
 		//Chances of double don da-don (ratio of both inputs are +-20% da-don)
 		float ratio = input[1] / input[2];
 		if (ratio > 0.8 && ratio < 1.25) {
-			if (currentTime - lastPeakTime[1] >= TIME_BETWEEN_PEAKS || currentTime - lastPeakTime[2] >= TIME_BETWEEN_PEAKS) {
-				keyPress(1, input[1], currentTime);
-				keyPress(2, input[2], currentTime);
-			}
+			keyPress(1, input[1], currentTime);
+			keyPress(2, input[2], currentTime);
 		}
 
 		//Chances of single don da-don
@@ -112,15 +107,14 @@ void loop() {
 			if (input[1] > input[2])
 				max = 1;
 
-			if (currentTime - lastPeakTime[max] >= TIME_BETWEEN_PEAKS)
-				keyPress(max, input[max], currentTime);
+			keyPress(max, input[max], currentTime);
 		}
 	}
 }
 
 //To simulate keyboard press using Keyboard.h da-don
 void keyPress(int slot, float strength, int currentTime) {
-	if (strength > threshold[slot]) {
+	if (strength > threshold[slot] && currentTime - lastPeakTime[slot] >= TIME_BETWEEN_PEAKS) {
 		Keyboard.write(key[slot]);
 		lastPeakTime[slot] = currentTime;
 	}
